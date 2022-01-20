@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { _ } from "lodash";
-import Box from "./Box";
+import Display from "./Display";
 
 const Order = ({ albums: { albums }, photos: { photos } }) => {
   console.log(albums);
@@ -55,7 +55,7 @@ const Order = ({ albums: { albums }, photos: { photos } }) => {
           <div>
             <h3>{fil.title}</h3>
             {dict[index + 1].map((photo) => (
-              <Box photo={photo} />
+              <Display style={{ height: "50%" }} photo={photo} />
             ))}
           </div>
         ))}

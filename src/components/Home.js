@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Box from "./Box";
+import Display from "./Display";
 import Spinner from "./Spinner";
 import { TextField } from "@mui/material";
 
@@ -21,10 +21,6 @@ const Home = ({ photos: { photos }, albums: { albums, loading } }) => {
             variant="outlined"
           />
           <Order />
-          {/* {photos &&
-            photos.map((photo) => (
-              <Box style={{ width: "100%" }} photo={photo} />
-            ))} */}
         </div>
       )}
     </div>
