@@ -4,15 +4,10 @@ import { connect } from "react-redux";
 import Box from "./Box";
 import Spinner from "./Spinner";
 import { TextField } from "@mui/material";
-import store from "../store";
+
 import Order from "./Order";
-import { getPhotos } from "../actions/photos";
-import { getAlbums } from "../actions/albums";
+
 const Home = ({ photos: { photos }, albums: { albums, loading } }) => {
-  useEffect(() => {
-    store.dispatch(getPhotos());
-    store.dispatch(getAlbums());
-  }, []);
   return (
     <div>
       {loading ? (
@@ -25,10 +20,11 @@ const Home = ({ photos: { photos }, albums: { albums, loading } }) => {
             label="Search Here"
             variant="outlined"
           />
-          {photos &&
+          <Order />
+          {/* {photos &&
             photos.map((photo) => (
               <Box style={{ width: "100%" }} photo={photo} />
-            ))}
+            ))} */}
         </div>
       )}
     </div>

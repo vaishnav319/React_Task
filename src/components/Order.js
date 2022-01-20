@@ -1,7 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { _ } from "lodash";
-const Order = ({ albums, photos }) => {
-  if (albums && photos) {
+import Box from "./Box";
+
+const Order = ({ albums: { albums }, photos: { photos } }) => {
+  console.log(albums);
+  console.log(photos);
+  if (photos && albums) {
     function checkifvalid(id, listofids) {
       for (var i = 0; i < listofids.length; i++) {
         if (id == listofids[i]) {
@@ -9,16 +15,14 @@ const Order = ({ albums, photos }) => {
         }
       }
     }
-    var filt = albums.filter((album) => album.id < 5);
+    var filt = albums.filter((album) => album.id <= 5);
     console.log(filt);
 
-    var idreq = [];
+    var idreq = [1, 2, 3, 4, 5];
 
-    var filtalbum = photos.filter((album) => album.id);
-
-    filt.forEach((album) => {
-      idreq.push(_.pick(album, ["id"]).id);
-    });
+    // filt.forEach((album) => {
+    //   idreq.push(_.pick(album, ["id"]).id);
+    // });
     console.log(idreq);
 
     photos.filter((album) => checkifvalid(album.albumId, idreq));
@@ -36,9 +40,37 @@ const Order = ({ albums, photos }) => {
         dict[String(album.albumId)].push(album);
       }
     });
-    console.log(dict["1"]);
+    console.log(dict["5"]);
   }
-  return <div></div>;
+  return (
+    <>
+      {/* {filt.map((num1, index) => {
+        var i = 1;
+        var num2 = dict[i];
+        console.log(num1, num2);
+        i++;
+      })} */}
+      {filt &&
+        filt.map((fil, index) => (
+          <div>
+            <h3>{fil.title}</h3>
+            {dict[index + 1].map((photo) => (
+              <Box photo={photo} />
+            ))}
+          </div>
+        ))}
+    </>
+  );
 };
 
-export default Order;
+Order.propTypes = {
+  albums: PropTypes.object.isRequired,
+  photos: PropTypes.object.isRequired,
+};
+
+const mapStateProps = (state) => ({
+  albums: state.albums,
+  photos: state.photos,
+});
+
+export default connect(mapStateProps, {})(Order);

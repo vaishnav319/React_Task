@@ -7,6 +7,7 @@ const Box = ({ photo }) => {
         width: "100%",
         height: "50%",
         display: "flex",
+        margin: "0.5rem",
         justifyContent: "justify-between",
         flexDirection: "row",
       }}
@@ -25,7 +26,9 @@ const Box = ({ photo }) => {
 
         <div>
           <p>{photo.title}</p>
-          <a href={photo.url}>{photo.url}</a>
+          <a target="_blank" href={photo.url}>
+            {photo.url}
+          </a>
         </div>
       </div>
       <div>
